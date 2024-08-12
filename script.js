@@ -4,7 +4,7 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = ["stick"];
+let inventory = [" Goblin Dirk"];
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -17,84 +17,98 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 const weapons = [
-  { name: "stick", power: 5 },
-  { name: "dagger", power: 30 },
-  { name: "claw hammer", power: 50 },
-  { name: "sword", power: 100 },
+  { name: " Goblin Dirk", power: 5 },
+  { name: " Faerie Dagger", power: 30 },
+  { name: " War Hammer", power: 50 },
+  { name: " Dragonforged Blade", power: 100 },
 ];
 const monsters = [
   {
-    name: "slime",
+    name: "Gelatinous Ooze",
     level: 2,
     health: 15,
+    description:
+      "A pulsating blob of translucent slime oozes from the shadows. It moves with surprising speed for something so formless.",
   },
   {
-    name: "fanged beast",
+    name: "Fanged Beast",
     level: 8,
     health: 60,
+    description:
+      "A hulking, quadrupedal creature with razor-sharp fangs and glowing red eyes, the fanged beast moves with surprising speed and agility. Its low growl sends shivers down your spine.",
   },
   {
-    name: "dragon",
+    name: "Dragon",
     level: 20,
     health: 300,
+    description:
+      "A colossal, winged beast of immense power. Its scales shimmer in hues of gold and crimson, and its fiery breath can incinerate anything in its path. The dragon is a legendary creature, feared and revered in equal measure.",
   },
 ];
 const locations = [
   {
-    name: "town square",
-    "button text": ["Go to store", "Go to cave", "Fight dragon"],
+    name: "Town Square",
+    "button text": [
+      "Visit The Blacksmith",
+      "Explore the Caverns",
+      "Challenge the Dragon",
+    ],
     "button functions": [goStore, goCave, fightDragon],
-    text: 'You are in the town square. You see a sign that says "Store".',
+    text: "You stand in the heart of the town square, a vibrant hub of activity. Vendors hawk their wares, and townsfolk chat animatedly. To the north, a dark cave mouth beckons, while a towering castle looms on the horizon.",
   },
   {
-    name: "store",
+    name: "Blacksmith's Shop",
     "button text": [
-      "Buy 10 health (10 gold)",
-      "Buy weapon (30 gold)",
-      "Go to town square",
+      "Buy Health Potion (10 gold)",
+      "Upgrade Weapon (30 gold)",
+      "Return to Town Square",
     ],
     "button functions": [buyHealth, buyWeapon, goTown],
-    text: "You enter the store.",
+    text: "You step into the blacksmith's shop, the air thick with the scent of hot metal. Tools and weapons are scattered about, and the rhythmic clang of the blacksmith's hammer echoes through the room. A burly figure stands over an anvil, sparks flying as he works.",
   },
   {
-    name: "cave",
-    "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+    name: "Whispering Cave",
+    "button text": [
+      "Fight Gelatinous Ooze",
+      "Fight Fanged Beast",
+      "Return to Town Square",
+    ],
     "button functions": [fightSlime, fightBeast, goTown],
-    text: "You enter the cave. You see some monsters.",
+    text: "You enter the Whispering Cave. The air is thick with moisture and the sound of dripping water echoes from unseen depths. Strange, gurgling noises come from a passage ahead.",
   },
   {
-    name: "fight",
+    name: "Fight",
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
-    text: "You are fighting a monster.",
+    text: "Adrenaline surges through your veins as you face your opponent. The monster's eyes gleam with malice, its form a menacing silhouette against the dim light.",
   },
   {
-    name: "kill monster",
+    name: "Kill Monster",
     "button text": [
-      "Go to town square",
-      "Go to town square",
-      "Go to town square",
+      "Return to Town Square",
+      "Return to Town Square",
+      "Return to Town Square",
     ],
     "button functions": [goTown, goTown, easterEgg],
-    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.',
+    text: "The monster's lifeless body lies at your feet, a testament to your victory. A sense of accomplishment washes over you as you collect the spoils of war.",
   },
   {
-    name: "lose",
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    name: "Lose",
+    "button text": ["Retry", "Retry", "Retry"],
     "button functions": [restart, restart, restart],
-    text: "You die. &#x2620;",
+    text: "Darkness consumes you as your life fades to black. The taste of defeat is bitter.",
   },
   {
-    name: "win",
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    name: "Win",
+    "button text": ["Play Again", "Play Again", "Play Again"],
     "button functions": [restart, restart, restart],
-    text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;",
+    text: "Victory is yours! A surge of euphoria fills you as you bask in the glory of your triumph.",
   },
   {
-    name: "easter egg",
-    "button text": ["2", "8", "Go to town square?"],
+    name: "Mysterious Chamber",
+    "button text": ["Choose Two", "Choose Eight", "Leave"],
     "button functions": [pickTwo, pickEight, goTown],
-    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!",
+    text: "You stumble upon a hidden chamber adorned with strange symbols. A peculiar energy fills the air. A cryptic voice whispers, 'Choose wisely, adventurer. Your fate hangs in the balance.' Two numbers appear before you: 2 and 8. Which do you select?",
   },
 ];
 
@@ -133,7 +147,7 @@ function buyHealth() {
     goldText.innerText = gold;
     healthText.innerText = health;
   } else {
-    text.innerText = "You do not have enough gold to buy health.";
+    text.innerText = "You do not have enough gold to buy health potions.";
   }
 }
 
@@ -148,10 +162,10 @@ function buyWeapon() {
       inventory.push(newWeapon);
       text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a new weapon.";
     }
   } else {
-    text.innerText = "You already have the most powerful weapon!";
+    text.innerText = "You already have the most powerful weapon.";
     button2.innerText = "Sell weapon for 15 gold";
     button2.onclick = sellWeapon;
   }
@@ -190,6 +204,7 @@ function goFight() {
   monsterStats.style.display = "block";
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
+  text.innerText = monsters[fighting].description;
 }
 
 function attack() {
@@ -255,7 +270,7 @@ function restart() {
   health = 100;
   gold = 50;
   currentWeapon = 0;
-  inventory = ["stick"];
+  inventory = [" Goblin Dirk"];
   goldText.innerText = gold;
   healthText.innerText = health;
   xpText.innerText = xp;
@@ -279,16 +294,16 @@ function pick(guess) {
   while (numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11));
   }
-  text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+  text.innerText = "You picked " + guess + ". Here are the random numbers: \n";
   for (let i = 0; i < 10; i++) {
-    text.innerText += numbers[i] + "\n";
+    text.innerText += numbers[i] + " ";
   }
   if (numbers.includes(guess)) {
-    text.innerText += "Right! You win 20 gold!";
+    text.innerText += "\n Right! You win 20 gold!";
     gold += 20;
     goldText.innerText = gold;
   } else {
-    text.innerText += "Wrong! You lose 10 health!";
+    text.innerText += "\n Wrong! You lose 10 health!";
     health -= 10;
     healthText.innerText = health;
     if (health <= 0) {

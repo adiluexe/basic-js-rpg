@@ -147,6 +147,7 @@ body {
   font-weight: bold;
   font-size: 1.25rem;
   transition: 0.5s;
+  text-transform: capitalize;
 }
 
 #controls button:hover {
