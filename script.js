@@ -294,16 +294,16 @@ function pick(guess) {
   while (numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11));
   }
-  text.innerText = "You picked " + guess + ". Here are the random numbers: \n";
+  text.innerText = "You chose " + guess + ". The random numbers are: \n";
   for (let i = 0; i < 10; i++) {
-    text.innerText += numbers[i] + " ";
+    text.innerText += numbers[i] + "*";
   }
   if (numbers.includes(guess)) {
-    text.innerText += "\n Right! You win 20 gold!";
+    text.innerText += "\n\nCorrect! You've won 20 gold!";
     gold += 20;
     goldText.innerText = gold;
   } else {
-    text.innerText += "\n Wrong! You lose 10 health!";
+    text.innerText += "\n\nIncorrect! You've lost 10 health!";
     health -= 10;
     healthText.innerText = health;
     if (health <= 0) {
