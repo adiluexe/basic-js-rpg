@@ -15,6 +15,7 @@
 
 * {
   margin: 0;
+  padding: 0;
   line-height: calc(1em + 0.5rem);
 }
 
@@ -51,20 +52,32 @@ h6 {
 
 /* END OF SETUP */
 
+html {
+  /* height: 100vh; */
+  /* width: 100%; */
+}
+
 body {
-  width: 100%;
-  height: 100vh;
+  overflow-x: hidden;
+  /* height: 100%; */
+  /* width: 100%; */
   background: linear-gradient(180deg, var(--dark) 0%, var(--darker) 100%);
+  background-attachment: fixed;
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
   color: var(--light);
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .header {
-  padding: 3rem;
+  padding: 1.5rem;
   font-family: "Playfair Display", sans-serif;
   font-size: 5rem;
   font-weight: 500;
@@ -82,7 +95,7 @@ body {
 }
 
 .footer {
-  padding: 2rem;
+  padding: 1.5rem;
   font-family: "Playfair Display", sans-serif;
   font-size: 1rem;
   font-weight: 500;
@@ -100,9 +113,12 @@ body {
 
 #game {
   flex: 1;
-  height: 100%;
-  width: 60%;
-  padding: 1rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
 #controls,
@@ -160,7 +176,7 @@ body {
 }
 
 #controls button:hover {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   background-color: var(--dark);
   color: var(--light);
   border-top: 5px solid var(--accent);
