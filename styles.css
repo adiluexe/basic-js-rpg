@@ -52,11 +52,6 @@ h6 {
 
 /* END OF SETUP */
 
-html {
-  /* height: 100vh; */
-  /* width: 100%; */
-}
-
 body {
   overflow-x: hidden;
   /* height: 100%; */
@@ -66,8 +61,8 @@ body {
 }
 
 main {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
   text-align: center;
   color: var(--light);
   display: flex;
@@ -77,7 +72,7 @@ main {
 }
 
 .header {
-  padding: 1.5rem;
+  padding: 2rem;
   font-family: "Playfair Display", sans-serif;
   font-size: 5rem;
   font-weight: 500;
@@ -113,7 +108,7 @@ main {
 
 #game {
   flex: 1;
-  width: 50%;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
